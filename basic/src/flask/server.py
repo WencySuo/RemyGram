@@ -1,7 +1,10 @@
 import json
 import os
 
-# Needed for email authentication
+from flask import Flask, flash, redirect, render_template, request, session
+from flask_mysqldb import MySQL
+
+# Email authentication imports
 from flask import Flask, redirect, request, url_for
 from flask_login import (
     LoginManager,
@@ -16,8 +19,6 @@ import requests
 # Internal imports
 from db import init_db_command
 from user import User
-
-from flask import Flask, flash, redirect, render_template, request, session
 
 # Configure application
 app = Flask(__name__)
