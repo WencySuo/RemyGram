@@ -5,13 +5,9 @@ import Nav from './Nav';
 
 function App() {
   return (
-    <div>
-      <div>
-        <Nav />
-      </div>
-      <div>
-        <Map /> 
-      </div>
+    <div className="flex flex-col h-screen">
+      <Nav />
+      {/* <Map /> */}
     </div>
   );
 }
