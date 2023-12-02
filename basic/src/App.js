@@ -1,13 +1,19 @@
+// App.js
 import React from 'react';
 import Map from './Map';
+import Nav from './Nav';
 
 function App() {
   return (
     <div>
-      <Map />
+      <div>
+        <Nav />
+      </div>
+      <div>
+        <Map /> 
+      </div>
     </div>
   );
 }
 
 export default App;
-

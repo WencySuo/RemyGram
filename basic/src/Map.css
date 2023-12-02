@@ -1,3 +1,8 @@
+/* tailwind dependencies */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .map-container {
   position: absolute;
   top: 0;
@@ -17,4 +22,27 @@
   z-index: 1 !important;
   padding: 6px;
   font-weight: bold;
+}
+
+/* map styling */
+#map {
+  position: absolute;
+  top: 50px; /* Adjust this value to leave enough room for your navigation bar */
+  bottom: 0;
+  width: 100%;
+}
+
+/* cord styling */
+.coordinates {
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  position: absolute;
+  bottom: 40px;
+  left: 10px;
+  padding: 5px 10px;
+  margin: 0;
+  font-size: 11px;
+  line-height: 18px;
+  border-radius: 3px;
+  display: none;
 }
