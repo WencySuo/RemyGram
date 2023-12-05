@@ -4,6 +4,7 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './Map.css';
 import PostForm from './PostForm';
+import marker from './assets/remylogo_tpt.png';
 
 const Map = () => {
   const [map, setMap] = useState(null); // State to store the map instance
@@ -58,7 +59,7 @@ const Map = () => {
       posts.forEach((post) => {
         const el = document.createElement('div');
         el.className = 'marker';
-        el.style.backgroundImage = `url('/basic/assets/remylogo_tpt.png')`;
+        el.style.backgroundImage = {marker};
         el.style.width = '60px';
         el.style.height = '60px';
         el.style.backgroundSize = '100%';
