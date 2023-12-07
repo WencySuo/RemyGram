@@ -1,6 +1,6 @@
 // SignIn.js
 import React, { useState } from 'react';
-import { signInWithGoogle, signInWithEmailPassword } from '../auth/auth';
+import { signInWithGoogle, signInWithEmailPassword } from '../helpers/Auth';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
