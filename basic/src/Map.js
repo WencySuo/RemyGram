@@ -68,38 +68,6 @@ const Map = () => {
         map.getCanvas().style.cursor = '';
       });
 
-      // // Add markers for existing posts
-      // posts.forEach((post) => {
-      //   const el = document.createElement('div');
-      //   el.className = 'marker';
-      //   el.style.backgroundImage = {marker};
-      //   el.style.width = '60px';
-      //   el.style.height = '60px';
-      //   el.style.backgroundSize = '100%';
-
-      //   // Create a popup with the post message
-      //   const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
-      //     <h3>${post.message}</h3>
-      //   );
-
-      //   el.addEventListener('click', () => {
-      //     window.alert(post.message);
-      //   });
-
-      //   // add new marker 
-      //   new mapboxgl.Marker(el)
-      //     .setLngLat(post.coordinates)
-      //     .setPopup(popup)
-      //     .addTo(map);
-        
-      //   // add click event listener to the marker to open the popup
-      //   el.addEventListener('click', () => {
-      //     new mapboxgl.Popup({ offset: 25 })
-      //     .setLngLat(post.coordinates)
-      //     .setHTML(<h3>${post.message}</h3>)
-      //     .addTo(map);
-      //   });
-      // });
     }
   }, [map, posts]);
 
