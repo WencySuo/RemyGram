@@ -1,7 +1,7 @@
 // Hopefully every request to the database can be routed through here.
 import { db, auth } from "../config/firebase";
 import { serverTimestamp } from "firebase/database";
-import { getDocs, collection, addDoc } from "firebase/firestore";
+import { getDocs, collection, addDoc, doc, setDoc } from "firebase/firestore";
 
 // If the user is logged in, creates a new entry in the database for them. Returns 1 if successful and 0 if not.
 export const addCurrentUser = () => {
@@ -52,33 +52,41 @@ export const isUserInDatabase = () => {
 export const addPost = async (caption, imagePath, geo, sightTime) => {
     try {
         // Getting everything ready
-        ref = collection(db, "posts");
-        uid = auth().currentUser.uid;
-        location = new firebase.firestore.GeoPoint(geo["geometry"]["coordinates"][1], geo["geometry"]["coordinates"][0]);
-        
+        const postsRef = collection(db, "posts");
+        const usersRef = collection(db, "users");
+        const uid = auth().currentUser.uid;
+        const location = new firebase.firestore.GeoPoint(geo["geometry"]["coordinates"][1], geo["geometry"]["coordinates"][0]);
+
         // Add the post to the database
-        try {
-            await addDoc(ref, {
-                author: uid,
-                caption: caption,
-                comments: {},
-                imagePath: imagePath,
-                likes: {},
-                location: location,
-                metadata: {
-                    numComments: 0,
-                    numLikes: 0,
-                    postTime: serverTimestamp()},
-                sightTime: sightTime,
-            });
-        } catch (err) {
-            console.error("Error making post:", err);
-        }
+        const docRef = await addDoc(postsRef, {
+            author: uid,
+            caption: caption,
+            comments: {},
+            imagePath: imagePath,
+            likes: {},
+            location: location,
+            metadata: {
+                numComments: 0,
+                numLikes: 0,
+                postTime: serverTimestamp()
+            },
+            sightTime: sightTime,
+            postId: ''
+        });
+
+        // Update the document with the generated ID
+        await updateDoc(docRef, { postId: docRef.id });
+
+        // Update the user's data with the post ID
+        const userRef = doc(usersRef, uid);
+        await updateDoc(userRef, {
+            [`posts.${docRef.id}`]: true
+        });
+    } catch (err) {
+        console.error("Error making post:", err);
     }
-    catch (err) {
-        console.error(err);
-    }
-}
+};
+
 
 // TODO: getPosts
 export const getPosts = async () => {
