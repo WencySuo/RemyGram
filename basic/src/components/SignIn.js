@@ -1,10 +1,18 @@
 // SignIn.js
 import React, { useState } from 'react';
 import { signInWithGoogle, signInWithEmailPassword } from '../helpers/Auth';
+import { auth, googleProvider } from "../config/firebase";
+import { signInWithPopup, signOut } from "firebase/auth";
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  try {
+    await signInWithEmailPopup(auth, googleProvider);
+  } catch (err) {
+    console.error(err);
+  };
 
   const handleGoogleSignIn = async () => {
     await signInWithGoogle();
