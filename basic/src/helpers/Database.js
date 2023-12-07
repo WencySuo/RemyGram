@@ -1,29 +1,28 @@
 // Hopefully every request to the database can be routed through here.
 import { db } from "../config/firebase";
 
-// TODO: addUser
-export const addUser = async (email, username) => {
-    try {
-      // Generate a unique user ID
-      const userId = database().ref().child('users').push().key;
-  
-      // Construct the user object
-      const user = {
+// TODO: addCurrentUser
+export const addCurrentUser = () => {
+    const currentUser = auth().currentUser;
+
+    if (currentUser) {
+        const { uid, email, displayName } = currentUser;
+
+        // Add user information to the 'users' collection
+        database().ref(`users/${uid}`).set({
         email: email,
-        username: username,
+        displayName: displayName,
         posts: {},
         likes: {},
-        comments: {}, 
-      };
-  
-      // Save the user to the database under "users" collection with the generated ID
-      await database().ref(`users/${userId}`).set(user);
-  
-      return userId; // Return the generated user ID if needed
-    } catch (error) {
-      console.error('Error adding user:', error);
+        comments: {},
+        });
+
+        return 1;
+    } else {
+        console.log('No user is currently signed in.');
+        return 0;
     }
-  };
+};
 
 // TODO: addPost
 
