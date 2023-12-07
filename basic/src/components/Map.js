@@ -51,12 +51,17 @@ const Map = () => {
 
         handleSignInClick();
 
-        const newPost = {
-          message: 'Your default message here',
-          coordinates: coordinates,
-        };
+        // const newPost = {
+        //   message: 'Your default message here',
+        //   coordinates: coordinates,
+        // };
 
-        setPosts([...posts, newPost]);
+        // setPosts([...posts, newPost]);
+
+        const testpop = new mapboxgl.Popup({ closeOnClick: false})
+          .setLngLat([-71.11671, 42.37443])
+          .setHTML('<h1>Welcome to RemyGram!</h1>')
+          .addTo(map);
 
         const signInPopupComponent = (
           <SignInPopup
