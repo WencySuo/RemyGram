@@ -5,7 +5,7 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './Map.css';
 import PostForm from './PostForm';
-import marker from './assets/remylogo_tpt.png';
+// import marker from './assets/remylogo_tpt.png';
 import PopupComponent from './Popup';
 
 const Map = () => {
@@ -128,7 +128,7 @@ const Map = () => {
   return (
     <div>
       <div id="map" className="flex-grow"></div>
-      <PostForm onPostSubmit={handlePostSubmit} />
+      {/* <PostForm onPostSubmit={handlePostSubmit} /> */}
       <pre id="coordinates" className="coordinates"></pre>
     </div>
   );

@@ -16,7 +16,6 @@ function App() {
   return (
     <div className="flex flex-col h-screen">
       <Nav />
-      <PostForm onPostSubmit={handlePostSubmit} />
       <Map posts={posts} />
     </div>
   );
