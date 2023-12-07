@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import bounds from './Map';
-import { db } from "./config/firebase";
+import { db } from "../../src/config/firebase";
 // import { getDocs } from "firebase/firestore"; 
 
 const PopupMap = () => {
@@ -46,7 +46,7 @@ const PopupMap = () => {
       center: [-77.04, 38.907],
       zoom: 11.15,
       maxBounds: bounds,
-    });``
+    });
 
     // wait for popupPosts to be available before setting up the map 
     if (popupPosts.length > 0) {
