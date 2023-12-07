@@ -17,7 +17,7 @@ const Nav = ({ onPostSubmit }) => {
             type="button"
             className="text-white bg-orange-400 hover:bg-orange-500 focus:ring-4 focus:outline-none focus:ring-orange-400 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-orange-600 dark:hover:bg-orange-500 dark:focus:ring-orange-600"
           >
-            Get started
+            Sign In
           </button>
           <button
             data-collapse-toggle="navbar-sticky"
