@@ -106,7 +106,7 @@ const Nav = () => {
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
           <button
             onClick={handleSignInClick}
-            className="text-white bg-blue-700 hover:bg-blue-800 ..."
+            className="text-white bg-orange-400 hover:bg-orange-500 focus:ring-4 focus:outline-none focus:ring-orange-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-orange-400 dark:hover:bg-orange-500 dark:focus:ring-orange-600"
           >
             Sign in
           </button>
