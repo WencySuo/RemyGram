@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import bounds from './Map';
 
 const PopupMap = () => {
   const [popupPosts, setPopupPosts] = useState([]);
@@ -29,11 +30,14 @@ const PopupMap = () => {
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v12',
-      center: [-96, 37.8],
-      zoom: 3
+      center: [-77.04, 38.907],
+      zoom: 11.15,
+      maxBounds: bounds,
     });
 
-    // Add a layer for previously submitted popup posts
+    // wait for popupPosts to be available before setting up the map 
+    if (popupPosts.length > 0) {
+      // Add a layer for previously submitted popup posts
     map.on('load', () => {
       map.addLayer({
         id: 'previousPopups',
@@ -68,6 +72,7 @@ const PopupMap = () => {
       map.on('click', 'previousPopups', (e) => {
         const coordinates = e.features[0].geometry.coordinates.slice();
         const description = e.features[0].properties.description;
+        const marker = new mapboxgl.Marker().setLngLat(coordinates).addTo(map);
 
         new mapboxgl.Popup()
           .setLngLat(coordinates)
@@ -85,7 +90,7 @@ const PopupMap = () => {
         map.getCanvas().style.cursor = '';
       });
     });
-
+  }
     // Cleanup the map on component unmount
     return () => map.remove();
   }, [popupPosts]);
