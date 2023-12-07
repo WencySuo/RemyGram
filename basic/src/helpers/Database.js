@@ -88,6 +88,9 @@ export const addPost = async (caption, imagePath, geo, sightTime) => {
 // };
 
 
+// TODO: getPosts
+
+
 // TODO: addComment
 
 
