@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Map from './components/Map';
 import Nav from './components/Nav';
-import PostForm from './components/PostForm';
 import SignIn from './components/SignIn';
 
 function App() {
