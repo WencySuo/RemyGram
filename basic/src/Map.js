@@ -39,38 +39,67 @@ const Map = () => {
 
   useEffect(() => {
     if (map) {
-      // Add markers for existing posts
-      posts.forEach((post) => {
-        const el = document.createElement('div');
-        el.className = 'marker';
-        el.style.backgroundImage = {marker};
-        el.style.width = '60px';
-        el.style.height = '60px';
-        el.style.backgroundSize = '100%';
+      // Ad a click event listener to the map 
+      map.on('click', (e) => {
+        // use the clicked coordinates to create a new post 
+        const coordinates = [e.lngLat.lng, e.lngLat.lat];
+        const newPost = {
+          message: 'Your default message here',
+          coordinates: coordinates, 
+        };
 
-        // Create a popup with the post message
-        const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
-          <h3>${post.message}</h3>
-        );
+        // update the state with the new post
+        setPosts([...posts, newPost]);
 
-        el.addEventListener('click', () => {
-          window.alert(post.message);
-        });
-
-        // add new marker 
-        new mapboxgl.Marker(el)
-          .setLngLat(post.coordinates)
-          .setPopup(popup)
+        // Create a popup with the post message and open it at the clicked coordinates
+        new mapboxgl.Popup()
+          .setLngLat(coordinates)
+          .setHTML('<p>${newPost.message}</p>')
           .addTo(map);
-        
-        // add click event listener to the marker to open the popup
-        el.addEventListener('click', () => {
-          new mapboxgl.Popup({ offset: 25 })
-          .setLngLat(post.coordinates)
-          .setHTML(<h3>${post.message}</h3>)
-          .addTo(map);
-        });
       });
+
+      // Change the cursor to a pointer when hovering over the map
+      map.on('mouseenter', ()=> {
+        map.getCanvas().style.cursor = 'pointer';
+      });
+
+      // Change it back to the default cursor when leaving the map 
+      map.on('mouseleave', () => {
+        map.getCanvas().style.cursor = '';
+      });
+
+      // // Add markers for existing posts
+      // posts.forEach((post) => {
+      //   const el = document.createElement('div');
+      //   el.className = 'marker';
+      //   el.style.backgroundImage = {marker};
+      //   el.style.width = '60px';
+      //   el.style.height = '60px';
+      //   el.style.backgroundSize = '100%';
+
+      //   // Create a popup with the post message
+      //   const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
+      //     <h3>${post.message}</h3>
+      //   );
+
+      //   el.addEventListener('click', () => {
+      //     window.alert(post.message);
+      //   });
+
+      //   // add new marker 
+      //   new mapboxgl.Marker(el)
+      //     .setLngLat(post.coordinates)
+      //     .setPopup(popup)
+      //     .addTo(map);
+        
+      //   // add click event listener to the marker to open the popup
+      //   el.addEventListener('click', () => {
+      //     new mapboxgl.Popup({ offset: 25 })
+      //     .setLngLat(post.coordinates)
+      //     .setHTML(<h3>${post.message}</h3>)
+      //     .addTo(map);
+      //   });
+      // });
     }
   }, [map, posts]);
 
