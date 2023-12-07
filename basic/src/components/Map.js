@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import './Map.css';
+import '../styles/Map.css';
 import PostForm from './PostForm';
-// import marker from './assets/remylogo_tpt.png';
+// import marker from '../assets/remylogo_tpt.png';
 import PopupComponent from './Popup';
 
 const Map = () => {

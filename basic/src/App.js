@@ -1,8 +1,8 @@
 // App.js
 import React, { useState } from 'react';
-import Map from './Map';
-import Nav from './Nav';
-import PostForm from './PostForm';
+import Map from './components/Map';
+import Nav from './components/Nav';
+import PostForm from './components/PostForm';
 
 function App() {
   const [posts, setPosts] = useState([]);
