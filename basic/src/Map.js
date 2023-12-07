@@ -68,10 +68,14 @@ const Map = () => {
           />
         );
 
+        // Create a DOM element from the React component
+        const popupContainer = document.createElement('div');
+        ReactDOM.render(popupComponent, popupContainer);
+
         // Create a popup with the post message and open it at the clicked coordinates
         new mapboxgl.Popup()
           .setLngLat(coordinates)
-          .setDOMContent(popupComponent)
+          .setDOMContent(popupContainer)
           .addTo(map);
       });
 
