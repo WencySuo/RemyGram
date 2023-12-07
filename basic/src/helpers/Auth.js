@@ -7,7 +7,7 @@ export const signIn = async () => {
     try {
         await signInWithPopup(auth, googleProvider);
     } catch (err) {
-        console.log(err);
+        console.error(err);
     }
 }
 
@@ -15,6 +15,6 @@ export const signOut = async () => {
     try {
         await signOut(auth);
     } catch (err) {
-        console.log(err);
+        console.error(err);
     }
 }
