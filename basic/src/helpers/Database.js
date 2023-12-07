@@ -9,19 +9,23 @@ export const addCurrentUser = () => {
         const { uid, email, displayName } = currentUser;
 
         // Add user information to the 'users' collection
-        database().ref(`users/${uid}`).set({
-        email: email,
-        displayName: displayName,
-        posts: {},
-        likes: {},
-        comments: {},
-        });
-
-        return 1;
+        try {
+            database().ref(`users/${uid}`).set({
+                email: email,
+                displayName: displayName,
+                posts: {},
+                likes: {},
+                comments: {},
+                });
+            return 1;
+        }
+        catch (err) {
+            console.error(err);
+        }
     } else {
         console.log('No user is currently signed in.');
-        return 0;
     }
+    return 0;
 };
 
 // TODO: addPost
