@@ -48,7 +48,7 @@ export const isUserInDatabase = () => {
     return false;
 }
 
-// TODO: addPost
+// Creates a new post with the current user as the author. "caption" and "imagePath" should be strings, "geo" should be a geoJSON, and "sightTime" should be a datetime.
 export const addPost = async (caption, imagePath, geo, sightTime) => {
     try {
         // Getting everything ready
