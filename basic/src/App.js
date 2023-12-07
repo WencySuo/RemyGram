@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Map from './components/Map';
 import Nav from './components/Nav';
 import SignIn from './components/SignIn';
+import PopupMap from './components/PopupMap'; 
+import { Popup } from 'mapbox-gl';
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -19,7 +21,7 @@ function App() {
       <div className="flex flex-col h-screen">
         <Nav />
         <Routes>
-          <Route path="/" exact component={App} />
+          <Route path="/" element={<PopupMap />} />
           <Route path="/signin" component={SignIn} />
         </Routes>
         <Map posts={posts} />

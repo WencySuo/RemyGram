@@ -2,26 +2,39 @@ import React, { useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import bounds from './Map';
+import { db } from "./config/firebase";
+// import { getDocs } from "firebase/firestore"; 
 
 const PopupMap = () => {
   const [popupPosts, setPopupPosts] = useState([]);
 
+  // const postCollectionRef = collection(db, "posts");
+
+  // Hardcoded dummy data for testing
+  const dummyPopupPosts = [
+    { title: 'Dummy Point 1', description: 'This is the first dummy point', coordinates: [-77.04, 38.907] },
+    { title: 'Dummy Point 2', description: 'This is the second dummy point', coordinates: [-77.05, 38.9] },
+    { title: 'Dummy Point 3', description: 'This is the third dummy point', coordinates: [-77.06, 38.92] },
+  ];
+
   useEffect(() => {
-    // Simulate fetching previously submitted popup posts from the database
-    // Replace this with actual API calls to your backend
-    const fetchPopupPosts = async () => {
-      try {
-        // Example: Fetch data from your API endpoint
-        const response = await fetch('YOUR_API_ENDPOINT');
-        const data = await response.json();
+  //   // Simulate fetching previously submitted popup posts from the database
+  //   // Replace this with actual API calls to your backend
+  //   const fetchPopupPosts = async () => {
+  //     try {
+  //       // Example: Fetch data from your API endpoint
+  //       const response = await fetch('YOUR_API_ENDPOINT');
+  //       // const data = await response getDocs(postCollectionRef);
+  //       console.log(data);
+  //       setPopupPosts(data);
+  //     } catch (error) {
+  //       console.error('Error fetching popup posts:', error);
+  //     }
+  //   };
 
-        setPopupPosts(data);
-      } catch (error) {
-        console.error('Error fetching popup posts:', error);
-      }
-    };
+  //   fetchPopupPosts();
 
-    fetchPopupPosts();
+    setPopupPosts(dummyPopupPosts);
   }, []);
 
   useEffect(() => {
@@ -33,7 +46,7 @@ const PopupMap = () => {
       center: [-77.04, 38.907],
       zoom: 11.15,
       maxBounds: bounds,
-    });
+    });``
 
     // wait for popupPosts to be available before setting up the map 
     if (popupPosts.length > 0) {
@@ -96,6 +109,7 @@ const PopupMap = () => {
   }, [popupPosts]);
 
   return <div id="map" style={{ position: 'absolute', top: 0, bottom: 0, width: '100%' }} />;
+  // return () => map
 };
 
 export default PopupMap;
