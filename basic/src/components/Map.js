@@ -193,7 +193,7 @@ const Map = () => {
     initializeMap();
 
     return () => map?.remove();
-  }, [map, posts]);
+  }, []);
 
   useEffect(() => {
     if (map) {
