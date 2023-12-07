@@ -71,15 +71,15 @@ export const addPost = async (caption, imagePath, geo, sightTime) => {
                 postTime: serverTimestamp()
             },
             sightTime: sightTime,
-            postId: ''
+            id: ''
         });
 
         // Update the document with the generated ID
-        await updateDoc(docRef, { postId: docRef.id });
+        await updateDoc(docRef, { id: docRef.id });
 
         // Update the user's data with the post ID
-        const userRef = doc(usersRef, uid);
-        await updateDoc(userRef, {
+        const user = doc(usersRef, uid);
+        await updateDoc(user, {
             [`posts.${docRef.id}`]: true
         });
     } catch (err) {
@@ -87,14 +87,12 @@ export const addPost = async (caption, imagePath, geo, sightTime) => {
     }
 };
 
-
-// TODO: getPosts
+// Returns a list of every post ever
 export const getPosts = async () => {
     try {
         const dataUnfiltered = await getDocs(collection(db, "posts"));
         const data = dataUnfiltered.docs.map((doc) => ({
             ...doc.data(),
-            id:doc.id,
         }));
         return data;
     } catch (err) {
@@ -102,9 +100,41 @@ export const getPosts = async () => {
     }
 }
 
-
 // TODO: addComment
+export const addComment = async (text, postId) => {
+    try {
+        // Getting everything ready
+        const ref = collection(db, "comments");
+        const postsRef = collection(db, "posts");
+        const usersRef = collection(db, "users");
+        const uid = auth().currentUser.uid;
 
+        // Add the post to the database
+        const docRef = await addDoc(ref, {
+            author: uid,
+            text: text,
+            postId: postId,
+            id: '',
+        });
+
+        // Update the document with the generated ID
+        await updateDoc(docRef, { id: docRef.id });
+
+        // Update the user's data with the comment ID
+        const user = doc(usersRef, uid);
+        await updateDoc(user, {
+            [`comments.${docRef.id}`]: true
+        });
+
+        // Update the post's data with the comment ID
+        const post = doc(postsRef, postId);
+        await updateDoc(post, {
+            [`comments.${docRef.id}`]: true
+        });
+    } catch (err) {
+        console.error("Error making comment:", err);
+    }
+}
 
 // TODO: addLike
 
