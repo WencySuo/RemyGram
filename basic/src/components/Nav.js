@@ -1,17 +1,22 @@
 // Nav.js
 import React, { useState } from 'react';
 import logo from '../assets/remylogo_tpt.png';
-import SignInPopup from './SignInPopup';
+import { signInWithGoogle } from '../helpers/Auth';
 
 const Nav = () => {
-  const [showSignInPopup, setShowSignInPopup] = useState(false);
 
-  const handleSignInClick = () => {
-    setShowSignInPopup(true);
-  };
+  const [email] = useState('');
+  const [password] = useState('');
 
-  const closeSignInPopup = () => {
-    setShowSignInPopup(false);
+  const handleSignIn = async () => {
+    try {
+      // Replace this with your actual sign-in logic
+      await signInWithGoogle(email, password);
+
+    } catch (error) {
+      console.error('Error signing in:', error);
+      // Handle sign-in error
+    }
   };
 
   return (
@@ -23,7 +28,7 @@ const Nav = () => {
         </a>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
           <button
-            onClick={handleSignInClick}
+            onClick={handleSignIn}
             className="text-white bg-orange-400 hover:bg-orange-500 focus:ring-4 focus:outline-none focus:ring-orange-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-orange-400 dark:hover:bg-orange-500 dark:focus:ring-orange-600"
           >
             Sign in
@@ -57,10 +62,8 @@ const Nav = () => {
           className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
           id="navbar-sticky"
         >
-          {/* Your other navigation elements */}
         </div>
       </div>
-      {showSignInPopup && <SignInPopup onClose={closeSignInPopup} />}
     </nav>
   );
 };
