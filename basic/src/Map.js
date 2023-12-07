@@ -37,22 +37,6 @@ const Map = () => {
     return () => map?.remove();
   }, []); // Empty dependency array ensures useEffect runs only once
 
-  const handlePostSubmit = (message) => {
-    if (map) {
-      // Get the current map center coordinates
-      const coordinates = map.getCenter().toArray();
-
-      // Simulate a new post object (replace this with your actual post creation logic)
-      const newPost = {
-        message,
-        coordinates,
-      };
-
-      // Update the state with the new post
-      setPosts([...posts, newPost]);
-    }
-  };
-
   useEffect(() => {
     if (map) {
       // Add markers for existing posts
@@ -64,16 +48,64 @@ const Map = () => {
         el.style.height = '60px';
         el.style.backgroundSize = '100%';
 
+        // Create a popup with the post message
+        const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
+          <h3>${post.message}</h3>
+        );
+
         el.addEventListener('click', () => {
           window.alert(post.message);
         });
 
+        // add new marker 
         new mapboxgl.Marker(el)
           .setLngLat(post.coordinates)
+          .setPopup(popup)
           .addTo(map);
+        
+        // add click event listener to the marker to open the popup
+        el.addEventListener('click', () => {
+          new mapboxgl.Popup({ offset: 25 })
+          .setLngLat(post.coordinates)
+          .setHTML(<h3>${post.message}</h3>)
+          .addTo(map);
+        });
       });
     }
   }, [map, posts]);
+
+  const handlePostSubmit = async (message) => {
+    if (map) {
+      // Get the current map center coordinates
+      const coordinates = map.getCenter().toArray();
+
+      // Simulate a post request to jsonplaceholder
+      try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            title: 'Post Title', 
+            body: message, 
+            userID: 1, // this can be any user ID
+          }),
+        });
+
+        if (!response.ok){
+          throw new Error('Failed to submit post');
+        }
+        
+        const newPost = await response.json();
+
+        // update the state with the new post 
+        setPosts([...posts, { message, coordinates, id: newPost.id }]);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
 
   return (
     <div>
