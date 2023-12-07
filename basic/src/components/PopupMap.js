@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import bounds from './Map';
+// import {bounds} from './Map'; // Adjust the path if needed
+// // import Map from './Map';
+// const bounds = Map.bounds;
+
 import { db } from "../../src/config/firebase";
 // import { getDocs } from "firebase/firestore"; 
 
@@ -15,6 +18,11 @@ const PopupMap = () => {
     { title: 'Dummy Point 1', description: 'This is the first dummy point', coordinates: [-77.04, 38.907] },
     { title: 'Dummy Point 2', description: 'This is the second dummy point', coordinates: [-77.05, 38.9] },
     { title: 'Dummy Point 3', description: 'This is the third dummy point', coordinates: [-77.06, 38.92] },
+  ];
+  
+  const bounds = [
+    [-71.119340, 42.373465],
+    [-71.114128, 42.380368]
   ];
 
   useEffect(() => {
@@ -36,6 +44,7 @@ const PopupMap = () => {
 
     setPopupPosts(dummyPopupPosts);
   }, []);
+
 
   useEffect(() => {
     mapboxgl.accessToken = 'pk.eyJ1Ijoid3d3c3NzIiwiYSI6ImNscGl0YjQybDAybWcybG91Ynd6bTAxeWMifQ.b4pItpBiNsKBSQ2bmV-Wuw';

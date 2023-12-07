@@ -199,4 +199,4 @@ const Map = () => {
   return <div id="map" style={{ position: 'absolute', top: 0, bottom: 0, width: '100%' }} />;
 };
 
-export default Map;
+export default { Map };

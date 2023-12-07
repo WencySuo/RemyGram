@@ -21,10 +21,9 @@ function App() {
       <div className="flex flex-col h-screen">
         <Nav />
         <Routes>
-          <Route path="/" element={<PopupMap />} />
-          <Route path="/signin" component={SignIn} />
+          <Route path="/" element={<PopupMap />} /> {/* Render PopupMap component */}
+          <Route path="/signin" element={<SignIn />} />
         </Routes>
-        <Map posts={posts} />
       </div>
     </Router>
   );
