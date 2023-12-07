@@ -1,7 +1,7 @@
 // Hopefully every request to the database can be routed through here.
 import { db, auth } from "../config/firebase";
 import { serverTimestamp } from "firebase/database";
-import { getFirestore, doc, setDoc, geoPoint } from "firebase/firestore";
+import { getFirestore, doc, setDoc, geoPoint, getDocs, collection } from "firebase/firestore";
 
 // If the user is logged in, creates a new entry in the database for them. Returns 1 if successful and 0 if not.
 export const addCurrentUser = () => {
@@ -89,6 +89,18 @@ export const addPost = async (caption, imagePath, geo, sightTime) => {
 
 
 // TODO: getPosts
+export const getPosts = async () => {
+    try {
+        const dataUnfiltered = await getDocs(collection(db, "posts"));
+        const data = dataUnfiltered.docs.map((doc) => ({
+            ...doc.data(),
+            id:doc.id,
+        }));
+        return data;
+    } catch (err) {
+        console.error("Error fetching posts:", err);
+    }
+}
 
 
 // TODO: addComment
