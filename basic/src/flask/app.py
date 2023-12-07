@@ -6,7 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 # Configure application
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:Youarenothing7!@localhost/remygram'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:Youarenothing7!@10.250.79.114/remygram'
 
 # Setting up databases
 db = SQLAlchemy(app)
