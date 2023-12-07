@@ -1,10 +1,12 @@
 // Map.js
 import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './Map.css';
 import PostForm from './PostForm';
 import marker from './assets/remylogo_tpt.png';
+import PopupComponent from './Popup';
 
 const Map = () => {
   const [map, setMap] = useState(null); // State to store the map instance
@@ -39,7 +41,7 @@ const Map = () => {
 
   useEffect(() => {
     if (map) {
-      // Ad a click event listener to the map 
+      // Add a click event listener to the map 
       map.on('click', (e) => {
         // use the clicked coordinates to create a new post 
         const coordinates = [e.lngLat.lng, e.lngLat.lat];
@@ -51,10 +53,25 @@ const Map = () => {
         // update the state with the new post
         setPosts([...posts, newPost]);
 
+        // popupcomponet for more complex content
+        const popupComponent = (
+          <PopupComponent
+            message={newPost.message}
+            onClose={() => {
+              // Handle close action
+              alert('Popup closed');
+            }}
+            onConfirm={() => {
+              // Handle confirm action
+              alert('Privacy accepted');
+            }}
+          />
+        );
+
         // Create a popup with the post message and open it at the clicked coordinates
         new mapboxgl.Popup()
           .setLngLat(coordinates)
-          .setHTML('<p>${newPost.message}</p>')
+          .setDOMContent(popupComponent)
           .addTo(map);
       });
 
