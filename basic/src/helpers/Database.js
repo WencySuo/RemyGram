@@ -22,11 +22,11 @@ export const addUser = async (email, username) => {
       return userId; // Return the generated user ID if needed
     } catch (error) {
       console.error('Error adding user:', error);
-      throw error; // Rethrow the error for handling in the UI
     }
   };
 
 // TODO: addPost
+
 
 // TODO: addComment
 
