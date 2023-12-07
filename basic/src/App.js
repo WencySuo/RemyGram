@@ -1,6 +1,6 @@
 // App.js
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Map from './components/Map';
 import Nav from './components/Nav';
 import PostForm from './components/PostForm';
@@ -19,10 +19,10 @@ function App() {
     <Router>
       <div className="flex flex-col h-screen">
         <Nav />
-        <Switch>
+        <Routes>
           <Route path="/" exact component={App} />
           <Route path="/signin" component={SignIn} />
-        </Switch>
+        </Routes>
         <Map posts={posts} />
       </div>
     </Router>
