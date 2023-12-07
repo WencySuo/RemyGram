@@ -56,6 +56,7 @@ export const addPost = async (caption, imagePath, geo, sightTime) => {
         uid = auth().currentUser.uid;
         location = new firebase.firestore.GeoPoint(geo["geometry"]["coordinates"][1], geo["geometry"]["coordinates"][0]);
         
+        // Add the post to the database
         try {
             await addDoc(ref, {
                 author: uid,
