@@ -1,5 +1,5 @@
 // Hopefully every request to the database can be routed through here.
-import { db } from "../config/firebase";
+import { db, auth } from "../config/firebase";
 
 // TODO: addCurrentUser
 export const addCurrentUser = () => {
@@ -10,7 +10,7 @@ export const addCurrentUser = () => {
 
         // Add user information to the 'users' collection
         try {
-            database().ref(`users/${uid}`).set({
+            db().ref(`users/${uid}`).set({
                 email: email,
                 displayName: displayName,
                 posts: {},
@@ -27,6 +27,10 @@ export const addCurrentUser = () => {
     }
     return 0;
 };
+
+export const getCurrentUser = () => {
+
+}
 
 // TODO: addPost
 
