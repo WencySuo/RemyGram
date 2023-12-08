@@ -31,4 +31,4 @@ We unfortunately were not the minds behind the map you see on the front page. We
 
 ### Next Steps
 
-RemyGram is currently a beautiful website, but there's no user functionality yet! Our next step is to allow users to create their own posts that anyone on the internet will be able to view and comment on. We also plan to store the images for each post on the Firebase online file service rather than in the source code, so that people can upload their own images.
+RemyGram is currently a beautiful website, but there's no user functionality yet! Our next step is to allow users to create their own posts that anyone on the internet will be able to view and comment on. We also plan to use Firebase's online file service to store images for each post, letting everyone show their Remy pictures to the world.
