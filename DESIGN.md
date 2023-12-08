@@ -32,16 +32,4 @@ We kept functions dealing havily with the Firebase API inside the /helpers file 
 
 ### Map Integration
 
-We unfortunately were not the minds behind the map you see on the front page. We integrated Mapbox GL JS, a provider of online custom maps, into the `Map.js` file 
-
-The `Map.js` component integrates Mapbox GL JS to display a map. It randomly generates dummy popups within predefined boundaries, allowing users to interact with and view specific locations.
-
-### Design Decisions
-
-- **Firebase Real-time Database**: We opted for Firebase's Firestore due to its real-time capabilities, enabling immediate updates across users in interactions like post creation, likes, and comments.
-- **Modular Components**: To enhance maintainability, each major functionality is encapsulated within separate components, promoting reusability and ease of testing.
-- **Mapbox Integration**: The Mapbox integration offers a visually appealing and interactive map display, enhancing the user experience.
-
-### Future Considerations
-
-For future enhancements, we plan to implement additional features like follower systems, direct messaging, and better geolocation-based services. Additionally, we aim to enhance security measures and optimize database queries for improved performance.
+We unfortunately were not the minds behind the map you see on the front page. We integrated the [Mapbox GL JS API](https://docs.mapbox.com/mapbox-gl-js/guides/), a provider of online custom maps, into the `Map.js` file. We chose Mapbox because it was free, easy-to-use, and well-established.
