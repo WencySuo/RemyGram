@@ -25,7 +25,7 @@ const Map = () => {
     };
 
     const map = new mapboxgl.Map({
-      container: 'map',
+      container: 'map-container',
       style: 'mapbox://styles/mapbox/streets-v12',
       center: [-77.04, 38.907],
       zoom: 11.15,
@@ -70,11 +70,7 @@ const Map = () => {
 
       // When a click event occurs on a feature in the dummyPopups layer, open a popup.
       map.on('click', 'dummyPopups', (e) => {
-        // const coordinates = e.features[0].geometry.coordinates.slice();
-        // const description = e.features[0].properties.description;
 
-        // const el = document.createElement('div');
-        // el.id = 'marker';
         const coordinates = e.features[0].geometry.coordinates.slice();
         const title = e.features[0].properties.title;
         const description = e.features[0].properties.description;
@@ -83,13 +79,6 @@ const Map = () => {
           .setLngLat(coordinates)
           .setHTML(`<h1>${title}</h1><p>${description}</p>`)
           .addTo(map);
-
-        // const popup = new mapboxgl.Popup().setLngLat(coordinates).setHTML(description).addTo(map);
-
-        // new mapboxgl.Marker(el)
-        //   .setLngLat(coordinates)
-        //   .setPopup(popup)
-        //   .addTo(map);
 
         new mapboxgl.Marker({ color: 'red', scale: 2 })
           .setLngLat(coordinates)
@@ -111,7 +100,7 @@ const Map = () => {
     return () => map.remove();
   }, []); // Empty dependency array ensures useEffect runs only once
 
-  return <div id="map" style={{ position: 'absolute', top: 0, bottom: 0, width: '100%' }} />;
+  return <div id="map-container" style={{ position: 'absolute', top: 0, bottom: 0, width: '100%' }} />;
 };
 
 export default Map;

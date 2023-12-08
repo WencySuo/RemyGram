@@ -2,10 +2,10 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Map from './components/Map';
+import PopupMap from './components/PopupMap';
 import Nav from './components/Nav';
 import SignIn from './components/SignIn';
-import PopupMap from './components/PopupMap'; 
-import { Popup } from 'mapbox-gl';
+
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -21,7 +21,20 @@ function App() {
       <div className="flex flex-col h-screen">
         <Nav />
         <Routes>
-          <Route path="/" element={<PopupMap />} /> {/* Render PopupMap component */}
+          {/* Render both Map and PopupMap components */}
+          <Route
+            path="/"
+            element={
+              <div className="flex flex-grow">
+                <div className="map-container">
+                  <Map onPostSubmit={handlePostSubmit} />
+                </div>
+                <div className="popup-map-container">
+                  <PopupMap posts={posts} />
+                </div>
+              </div>
+            }
+          />
           <Route path="/signin" element={<SignIn />} />
         </Routes>
       </div>
