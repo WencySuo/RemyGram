@@ -80,7 +80,7 @@ export const addPost = async (caption, imagePath, geo, sightTime) => {
         // Update the user's data with the post ID
         const user = doc(usersRef, uid);
         await updateDoc(user, {
-            [`posts.${docRef.id}`]: true
+            ['posts.${docRef.id}']: true,
         });
     } catch (err) {
         console.error("Error making post:", err);
@@ -109,7 +109,7 @@ export const addComment = async (text, postId) => {
         const usersRef = collection(db, "users");
         const uid = auth().currentUser.uid;
 
-        // Add the post to the database
+        // Add the comment to the database
         const docRef = await addDoc(ref, {
             author: uid,
             text: text,
@@ -123,13 +123,14 @@ export const addComment = async (text, postId) => {
         // Update the user's data with the comment ID
         const user = doc(usersRef, uid);
         await updateDoc(user, {
-            [`comments.${docRef.id}`]: true
+            ['comments.${docRef.id}']: true,
         });
 
-        // Update the post's data with the comment ID
+        // Update the post's data with the comment ID and increment the comment counter
         const post = doc(postsRef, postId);
         await updateDoc(post, {
-            [`comments.${docRef.id}`]: true
+            ['comments.${docRef.id}']: true,
+            ['metadata.numComments']: FieldValue.increment(1),
         });
     } catch (err) {
         console.error("Error making comment:", err);
@@ -137,4 +138,26 @@ export const addComment = async (text, postId) => {
 }
 
 // TODO: addLike
+export const addLike = async (postId) => {
+    try {
+        // Getting everything ready
+        const postsRef = collection(db, "posts");
+        const usersRef = collection(db, "users");
+        const uid = auth().currentUser.uid;
 
+        // Update the user's data with the post ID
+        const user = doc(usersRef, uid);
+        await updateDoc(user, {
+            ['likes.${postId}']: true,
+        });
+
+        // Update the post's data with the user ID and increment the like counter
+        const post = doc(postsRef, postId);
+        await updateDoc(post, {
+            ['likes.${uid}']: true,
+            ['metadata.numLikes']: FieldValue.increment(1),
+        });
+    } catch (err) {
+        console.error("Error adding like:", err);
+    }
+}
