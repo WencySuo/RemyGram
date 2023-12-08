@@ -8,8 +8,18 @@ const PopupMap = () => {
 
   // Use a simplified dummy data for testing
   const dummyPopupPosts = [
-    { title: 'Dummy Point 1', description: 'This is the first dummy point', coordinates: [-71.118, 42.375] },
-    { title: 'Dummy Point 2', description: 'This is the second dummy point', coordinates: [-71.115, 42.378] },
+    { title: 'Remmy Sighting 1', description: 'I saw remy at____', coordinates: [-71.118, 42.375] },
+    { title: 'Remmy Sighting 2', description: 'I saw remy at____', coordinates: [-71.115, 42.378] },
+    { title: 'Remmy Sighting 3', description: 'I saw remy at____', coordinates: [-71.1173, 42.3771] },
+    { title: 'Remmy Sighting 4', description: 'I saw remy at____', coordinates: [-71.1160, 42.3760] },
+    { title: 'Remmy Sighting 5', description: 'I saw remy at____', coordinates: [-71.1148, 42.3749] },
+    { title: 'Remmy Sighting 6', description: 'I saw remy at____', coordinates: [-71.1180, 42.3755] },
+    { title: 'Remmy Sighting 7', description: 'I saw remy at____', coordinates: [-71.1167, 42.3744] },
+    { title: 'Remmy Sighting 8', description: 'I saw remy at____', coordinates: [-71.1155, 42.3733] },
+    { title: 'Remmy Sighting 9', description: 'I saw remy at____', coordinates: [-71.1177, 42.3739] },
+    { title: 'Remmy Sighting 10', description: 'I saw remy at____', coordinates: [-71.1164, 42.3728] },
+    { title: 'Remmy Sighting 11', description: 'I saw remy at____', coordinates: [-71.1152, 42.3717] },
+
   ];
 
   useEffect(() => {
