@@ -87,20 +87,7 @@ export const addPost = async (caption, imagePath, geo, sightTime) => {
     }
 };
 
-// Returns a list of every post ever
-export const getPosts = async () => {
-    try {
-        const dataUnfiltered = await getDocs(collection(db, "posts"));
-        const data = dataUnfiltered.docs.map((doc) => ({
-            ...doc.data(),
-        }));
-        return data;
-    } catch (err) {
-        console.error("Error fetching posts:", err);
-    }
-}
-
-// TODO: addComment
+// Adds a comment, with the current user as the author, under the specified post
 export const addComment = async (text, postId) => {
     try {
         // Getting everything ready
@@ -137,7 +124,7 @@ export const addComment = async (text, postId) => {
     }
 }
 
-// TODO: addLike
+// Adds a like by the current user on the specified post
 export const addLike = async (postId) => {
     try {
         // Getting everything ready
@@ -159,5 +146,76 @@ export const addLike = async (postId) => {
         });
     } catch (err) {
         console.error("Error adding like:", err);
+    }
+}
+
+// Returns a list of all users
+export const getUsers = async () => {
+    try {
+        const dataUnfiltered = await getDocs(collection(db, "users"));
+        const data = dataUnfiltered.docs.map((doc) => ({
+            ...doc.data(),
+        }));
+        return data;
+    } catch (err) {
+        console.error("Error fetching users:", err);
+    }
+}
+
+// Returns a list of the X most recent posts, or every post ever if no numPosts is specified
+export const getPosts = async (numPosts) => {
+    try {
+        var dataUnfiltered;
+        if (numPosts === undefined) {
+            dataUnfiltered = await getDocs(collection(db, "posts"));
+        }
+        else {
+            dataUnfiltered = await getDocs(query(collection(db, "posts"), orderBy("metadata.postTime", "desc"), limit(numPosts)));
+        }
+        const data = dataUnfiltered.docs.map((doc) => ({
+            ...doc.data(),
+        }));
+        return data;
+    } catch (err) {
+        console.error("Error fetching posts:", err);
+    }
+}
+
+// Returns a list of every comment under a given post
+export const getComments = async (postId) => {
+    try {
+        const dataUnfiltered = await getDocs(query(collection(db, "comments"), where("postId", "==", postId)));
+        const data = dataUnfiltered.docs.map((doc) => ({
+            ...doc.data(),
+        }));
+        return data;
+    } catch (err) {
+        console.error("Error fetching comments:", err);
+    }
+}
+
+// Returns a list of every post by the specified user
+export const getPostsByUser = async (userId) => {
+    try {
+        const dataUnfiltered = await getDocs(query(collection(db, "posts"), where("author", "==", userId)));
+        const data = dataUnfiltered.docs.map((doc) => ({
+            ...doc.data(),
+        }));
+        return data;
+    } catch (err) {
+        console.error("Error fetching posts:", err);
+    }
+}
+
+// Returns a list of every comment by the specified user
+export const getCommentsByUser = async (userId) => {
+    try {
+        const dataUnfiltered = await getDocs(query(collection(db, "comments"), where("author", "==", userId)));
+        const data = dataUnfiltered.docs.map((doc) => ({
+            ...doc.data(),
+        }));
+        return data;
+    } catch (err) {
+        console.error("Error fetching comments:", err);
     }
 }
