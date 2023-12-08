@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/static/css/main.2e20149f.css",
-    "main.js": "/static/js/main.d4cd8637.js",
+    "main.js": "/static/js/main.47d4edb5.js",
     "static/media/remylogo_tpt.png": "/static/media/remylogo_tpt.e742c4eb67895fa4c24e.png",
     "index.html": "/index.html",
     "main.2e20149f.css.map": "/static/css/main.2e20149f.css.map",
-    "main.d4cd8637.js.map": "/static/js/main.d4cd8637.js.map"
+    "main.47d4edb5.js.map": "/static/js/main.47d4edb5.js.map"
   },
   "entrypoints": [
     "static/css/main.2e20149f.css",
-    "static/js/main.d4cd8637.js"
+    "static/js/main.47d4edb5.js"
   ]
 }
