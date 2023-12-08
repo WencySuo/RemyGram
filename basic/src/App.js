@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Map from './components/Map';
 import PopupMap from './components/PopupMap';
 import Nav from './components/Nav';
-import SignIn from './components/SignIn';
 
 
 function App() {
@@ -35,7 +34,6 @@ function App() {
               </div>
             }
           />
-          <Route path="/signin" element={<SignIn />} />
         </Routes>
       </div>
     </Router>
