@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.ea584189.css",
+    "main.js": "/static/js/main.8b5bcf0f.js",
+    "static/media/remylogo_tpt.png": "/static/media/remylogo_tpt.e742c4eb67895fa4c24e.png",
+    "index.html": "/index.html",
+    "main.ea584189.css.map": "/static/css/main.ea584189.css.map",
+    "main.8b5bcf0f.js.map": "/static/js/main.8b5bcf0f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ea584189.css",
+    "static/js/main.8b5bcf0f.js"
+  ]
+}

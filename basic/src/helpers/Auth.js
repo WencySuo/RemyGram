@@ -1,5 +1,5 @@
 // Basic Google authentication
-import { auth, googleProvider } from "../config/firebase";
+import { auth, googleProvider } from "../config/Firebase";
 import { signInWithPopup, signOut as firebaseSignOut } from "firebase/auth";
 
 // Uses Firebase's built-in Google authentication service to log the user in and out

@@ -1,5 +1,5 @@
 // Hopefully every request to the database can be routed through here.
-import { db, auth } from "../config/firebase";
+import { db, auth } from "../config/Firebase";
 import { serverTimestamp } from "firebase/database";
 import { getDocs, collection, addDoc, doc, setDoc } from "firebase/firestore";
 
