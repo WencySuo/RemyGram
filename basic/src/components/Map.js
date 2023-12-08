@@ -68,6 +68,21 @@ const Map = () => {
         },
       });
 
+      // When a click event occurs on the Map, open a popup to submit a post.
+      map.on('click', (e) => {
+        const coordinates = e.lngLat;
+
+        new mapboxgl.Popup()
+          .setLngLat(coordinates)
+          .setHTML(`<h1>Clicked Here!</h1>`)
+          .addTo(map);
+
+        new mapboxgl.Marker({ color: 'red', scale: 2 })
+          .setLngLat(coordinates)
+          .addTo(map);
+      });
+    
+
       // When a click event occurs on a feature in the dummyPopups layer, open a popup.
       map.on('click', 'dummyPopups', (e) => {
 
