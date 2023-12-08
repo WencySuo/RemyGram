@@ -39,8 +39,9 @@ const Map = () => {
         return {
           type: 'Feature',
           properties: {
-            description: `<strong>Dummy Popup ${index + 1}</strong><p>This is a dummy popup description.</p>`,
-            icon: '{marker-symbol}-15', // Choose an appropriate icon
+            title: `Dummy Popup ${index + 1}`,
+            description: 'This is a dummy popup description.',
+            'marker-symbol': 'theatre', // Adjust this to an appropriate icon
           },
           geometry: {
             type: 'Point',
@@ -62,26 +63,36 @@ const Map = () => {
         type: 'symbol',
         source: 'dummyPopups',
         layout: {
-          'icon-image': ['get', 'icon'],
+          'icon-image': ['get', 'marker-symbol'],
           'icon-allow-overlap': true,
         },
       });
 
       // When a click event occurs on a feature in the dummyPopups layer, open a popup.
       map.on('click', 'dummyPopups', (e) => {
+        // const coordinates = e.features[0].geometry.coordinates.slice();
+        // const description = e.features[0].properties.description;
+
+        // const el = document.createElement('div');
+        // el.id = 'marker';
         const coordinates = e.features[0].geometry.coordinates.slice();
+        const title = e.features[0].properties.title;
         const description = e.features[0].properties.description;
 
-        const el = document.createElement('div');
-        el.id = 'marker';
-
-        const popup = new mapboxgl.Popup({ offset: 25 }).setText(
-          'test marker popup!'
-        );
-
-        new mapboxgl.Marker(el)
+        new mapboxgl.Popup()
           .setLngLat(coordinates)
-          .setPopup(Popup)
+          .setHTML(`<h1>${title}</h1><p>${description}</p>`)
+          .addTo(map);
+
+        // const popup = new mapboxgl.Popup().setLngLat(coordinates).setHTML(description).addTo(map);
+
+        // new mapboxgl.Marker(el)
+        //   .setLngLat(coordinates)
+        //   .setPopup(popup)
+        //   .addTo(map);
+
+        new mapboxgl.Marker({ color: 'red', scale: 2 })
+          .setLngLat(coordinates)
           .addTo(map);
       });
 
@@ -103,4 +114,4 @@ const Map = () => {
   return <div id="map" style={{ position: 'absolute', top: 0, bottom: 0, width: '100%' }} />;
 };
 
-export default { Map };
+export default Map;
