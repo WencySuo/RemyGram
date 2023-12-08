@@ -19,7 +19,7 @@ const PopupMap = () => {
     { title: 'Dummy Point 2', description: 'This is the second dummy point', coordinates: [-77.05, 38.9] },
     { title: 'Dummy Point 3', description: 'This is the third dummy point', coordinates: [-77.06, 38.92] },
   ];
-  
+
   const bounds = [
     [-71.119340, 42.373465],
     [-71.114128, 42.380368]
@@ -115,7 +115,7 @@ const PopupMap = () => {
   }
     // Cleanup the map on component unmount
     return () => map.remove();
-  }, [popupPosts]);
+  }, [dummyPopupPosts, bounds]);
 
   return <div id="map" style={{ position: 'absolute', top: 0, bottom: 0, width: '100%' }} />;
   // return () => map
