@@ -8,17 +8,17 @@ const PopupMap = () => {
 
   // Use a simplified dummy data for testing
   const dummyPopupPosts = [
-    { title: 'Remmy Sighting 1', description: 'I saw remy at____', coordinates: [-71.118, 42.375] },
-    { title: 'Remmy Sighting 2', description: 'I saw remy at____', coordinates: [-71.115, 42.378] },
-    { title: 'Remmy Sighting 3', description: 'I saw remy at____', coordinates: [-71.1173, 42.3771] },
-    { title: 'Remmy Sighting 4', description: 'I saw remy at____', coordinates: [-71.1160, 42.3760] },
-    { title: 'Remmy Sighting 5', description: 'I saw remy at____', coordinates: [-71.1148, 42.3749] },
-    { title: 'Remmy Sighting 6', description: 'I saw remy at____', coordinates: [-71.1180, 42.3755] },
-    { title: 'Remmy Sighting 7', description: 'I saw remy at____', coordinates: [-71.1167, 42.3744] },
-    { title: 'Remmy Sighting 8', description: 'I saw remy at____', coordinates: [-71.1155, 42.3733] },
-    { title: 'Remmy Sighting 9', description: 'I saw remy at____', coordinates: [-71.1177, 42.3739] },
-    { title: 'Remmy Sighting 10', description: 'I saw remy at____', coordinates: [-71.1164, 42.3728] },
-    { title: 'Remmy Sighting 11', description: 'I saw remy at____', coordinates: [-71.1152, 42.3717] },
+    { title: 'Remy Sighting 1', description: 'I saw remy at Harvard Hall!', coordinates: [-71.118, 42.375], img_path:'basic/src/assets/IMG_4654.HEIC'},
+    { title: 'Remy Sighting 2', description: 'I saw remy near the Peabody Museum!', coordinates: [-71.115, 42.378], img_path:'basic/src/assets/IMG_4654.HEIC' },
+    { title: 'Remy Sighting 3', description: 'I saw remy near the Physics Research Library!', coordinates: [-71.1173, 42.3771], img_path:'basic/src/assets/IMG_4654.HEIC'},
+    { title: 'Remy Sighting 4', description: 'I saw remy outside of Annenberg and the Science Center!', coordinates: [-71.1160, 42.3760], img_path:'basic/src/assets/IMG_4654.HEIC'},
+    { title: 'Remy Sighting 5', description: 'I saw remy at near Sever Hall', coordinates: [-71.1148, 42.3749], img_path:'basic/src/assets/IMG_4654.HEIC'},
+    { title: 'Remy Sighting 6', description: 'I saw remy at Stoughton Hall', coordinates: [-71.1180, 42.3755], img_path:'basic/src/assets/IMG_4654.HEIC'},
+    { title: 'Remy Sighting 7', description: 'I saw remy at Tercentery Theater', coordinates: [-71.1167, 42.3744], img_path:'basic/src/assets/IMG_4654.HEIC'},
+    { title: 'Remy Sighting 8', description: 'I saw remy at outside Lamont', coordinates: [-71.1155, 42.3733], img_path:'basic/src/assets/IMG_4654.HEIC'},
+    { title: 'Remy Sighting 9', description: 'I saw remy at Greys Hall', coordinates: [-71.1177, 42.3739], img_path:'basic/src/assets/IMG_4654.HEIC'},
+    { title: 'Remy Sighting 10', description: 'I saw remy at on Harvard St', coordinates: [-71.1164, 42.3728], img_path:'basic/src/assets/IMG_4654.HEIC'},
+    { title: 'Remy Sighting 11', description: 'I saw remy at Cafe Pamplona', coordinates: [-71.1152, 42.3717], img_path:'basic/src/assets/IMG_4654.HEIC'},
 
   ];
 
@@ -79,10 +79,11 @@ const PopupMap = () => {
         map.on('click', 'previousPopups', (e) => {
           const coordinates = e.features[0].geometry.coordinates.slice();
           const description = e.features[0].properties.description;
+          const img_path = e.img_path;
 
           new mapboxgl.Popup()
             .setLngLat(coordinates)
-            .setHTML(`<h1>${description}</h1>`)
+            .setHTML(`<h1>${description}</h1><img src="${img_path}" alt="Popup Image" />`)
             .addTo(map);
         });
 
