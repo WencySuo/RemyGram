@@ -2,11 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import img1 from '../assets/IMG_4654.png';
-import img2 from '../assets/IMG_9570.JPG';
-import img3 from '../assets/IMG_4736.png';
-import img4 from '../assets/IMG_4737.png';
-import img5 from '../assets/IMG_5025.png';
 
 const PopupMap = () => {
   const [popupPosts, setPopupPosts] = useState([]);
